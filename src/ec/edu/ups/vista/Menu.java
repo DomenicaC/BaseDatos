@@ -12,6 +12,7 @@ import ec.edu.ups.modelo.persona.Crear;
 import ec.edu.ups.modelo.persona.Eliminar;
 import ec.edu.ups.modelo.persona.Listar;
 import ec.edu.ups.modelo.persona.Modificar;
+import ec.edu.ups.modelo.persona.Persona;
 import javax.swing.JOptionPane;
 
 /**
@@ -205,6 +206,9 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        Persona pers = contPer.printPer();
+        System.out.println(pers);
         
     }//GEN-LAST:event_itemListarActionPerformed
 
