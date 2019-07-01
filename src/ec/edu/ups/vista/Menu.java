@@ -45,7 +45,7 @@ public class Menu extends javax.swing.JFrame {
     private ModificarDir modDir;
     private EliminarDir eliD;
     private ListarDir listarD;
-    
+
     private BuscarDireccionCedula bus;
 
     public Menu() {
@@ -256,7 +256,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             if (x == null) {
                 if (eliD == null || eliD.isVisible() == false) {
-                    eliD = new EliminarDir(contDir, contPer);
+                    eliD = new EliminarDir();
                     desktopPane.add(eliD);
                     desktopPane.moveToFront(eliD);
 
@@ -277,7 +277,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             if (x == null) {
                 if (listarD == null || listarD.isVisible() == false) {
-                    listarD = new ListarDir(contDir, contPer);
+                    listarD = new ListarDir();
                     desktopPane.add(listarD);
                     desktopPane.moveToFront(listarD);
 
@@ -289,7 +289,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_itemListar1ActionPerformed
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
@@ -362,7 +362,7 @@ public class Menu extends javax.swing.JFrame {
             if (x == null) {
 
                 if (crearD == null || crearD.isVisible() == false) {
-                    crearD = new CrearDir(contDir, contPer);
+                    crearD = new CrearDir();
                     desktopPane.add(crearD);
                     desktopPane.moveToFront(crearD);
 
@@ -384,7 +384,7 @@ public class Menu extends javax.swing.JFrame {
             if (x == null) {
 
                 if (buscarD == null || buscarD.isVisible() == false) {
-                    buscarD = new BuscarDir(contDir, contPer);
+                    buscarD = new BuscarDir();
                     desktopPane.add(buscarD);
                     desktopPane.moveToFront(buscarD);
 
@@ -406,7 +406,7 @@ public class Menu extends javax.swing.JFrame {
             if (x == null) {
 
                 if (modDir == null || modDir.isVisible() == false) {
-                    modDir = new ModificarDir(contDir, contPer);
+                    modDir = new ModificarDir();
                     desktopPane.add(modDir);
                     desktopPane.moveToFront(modDir);
 
@@ -422,7 +422,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMod1ActionPerformed
 
     private void itemListar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListar2ActionPerformed
-        
+
         String x = BuscarDireccionCedula.x;
         try {
             if (x == null) {
@@ -440,7 +440,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_itemListar2ActionPerformed
 
     /**

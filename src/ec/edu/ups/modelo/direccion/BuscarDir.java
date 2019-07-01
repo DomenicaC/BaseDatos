@@ -21,12 +21,10 @@ public class BuscarDir extends javax.swing.JInternalFrame {
      */
     public static String x;
     private ControladorBaseDireccion contDir;
-    private ContorladorBasePersona contPer;
 
-    public BuscarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
+    public BuscarDir() {
         initComponents();
-        this.contDir = contDir;
-        this.contPer = contPer;
+        this.contDir = new ControladorBaseDireccion();
 
         x = "x";
         int a = Menu.desktopPane.getWidth() - this.getWidth();
@@ -208,23 +206,23 @@ public class BuscarDir extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        int codigo = Integer.parseInt(txtCodigo.getText());
-        Direccion buscar = contDir.readDir(codigo);
-        System.out.println("Codigo " + codigo);
+        //int codigo = Integer.parseInt(txtCodigo.getText());
+        Direccion buscar = contDir.readDir(Integer.parseInt(txtCodigo.getText()));
+        //System.out.println("Codigo " + codigo);
 
-        if (buscar == null) {
-
-            JOptionPane.showMessageDialog(this, "Codigo no existe");
-
-        } else {
-
-            txtCodigo.setText(String.valueOf(codigo));
+        if (buscar.getCallePrin() != null) {
+            
             txtCallePrin.setText(buscar.getCallePrin());
             txtCalleSec.setText(buscar.getCalleSec());
             txtNum.setText(String.valueOf(buscar.getNumero()));
-            txtCed.setText(buscar.getperCedula());
-
+            txtCed.setText(buscar.getPerCedula());
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(this, "El codigo no existe");
+            
         }
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 

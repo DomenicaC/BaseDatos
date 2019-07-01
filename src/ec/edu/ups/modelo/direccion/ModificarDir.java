@@ -22,12 +22,10 @@ public class ModificarDir extends javax.swing.JInternalFrame {
      */
     public static String x;
     private ControladorBaseDireccion contDir;
-    private ContorladorBasePersona contPer;
 
-    public ModificarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
+    public ModificarDir() {
         initComponents();
-        this.contDir = contDir;
-        this.contPer = contPer;
+        this.contDir = new ControladorBaseDireccion();
 
         x = "x";
         int a = Menu.desktopPane.getWidth() - this.getWidth();
@@ -213,20 +211,21 @@ public class ModificarDir extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        int codigo = Integer.parseInt(txtCodigo.getText());
-        Direccion buscar = contDir.readDir(codigo);
+        //int codigo = Integer.parseInt(txtCodigo.getText());
+        Direccion buscar = contDir.readDir(Integer.parseInt(txtCodigo.getText()));
+        //System.out.println("Codigo " + codigo);
 
-        if (buscar == null) {
-
-            JOptionPane.showMessageDialog(this, "Codigo no existe");
-
-        } else {
-
+        if (buscar.getCallePrin() != null) {
+            
             txtCallePrin.setText(buscar.getCallePrin());
             txtCalleSec.setText(buscar.getCalleSec());
             txtNum.setText(String.valueOf(buscar.getNumero()));
-            txtCed.setText(buscar.getperCedula());
-
+            txtCed.setText(buscar.getPerCedula());
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(this, "El codigo no existe");
+            
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -240,14 +239,15 @@ public class ModificarDir extends javax.swing.JInternalFrame {
             direccion.setCallePrin(txtCallePrin.getText());
             direccion.setCalleSec(txtCalleSec.getText());
             direccion.setNumero(Integer.parseInt(txtNum.getText()));
-            direccion.setperCedula(txtCed.getText());
+            direccion.setPerCedula(txtCed.getText());
             contDir.updateDir(direccion);
             JOptionPane.showMessageDialog(this, "Direccion Modificada");
 
+            txtCodigo.setText("");
             txtCallePrin.setText("");
             txtCalleSec.setText("");
-            txtCed.setText("");
             txtNum.setText("");
+            txtCed.setText("");
 
         } catch (SQLException error) {
 

@@ -5,7 +5,6 @@
  */
 package ec.edu.ups.modelo.direccion;
 
-
 /**
  *
  * @author Domenica Cañizares
@@ -61,17 +60,17 @@ public class Direccion {
         this.numero = numero;
     }
 
-    public String getperCedula() {
+    public String getPerCedula() {
         return perCedula;
     }
 
-    public void setperCedula(String perCedula) {
+    public void setPerCedula(String perCedula) {
         this.perCedula = perCedula;
     }
 
     @Override
     public String toString() {
-        return "Direccion{" + "codigo=" + codigo + ", callePrin=" + callePrin + ", calleSec=" + calleSec + ", numero=" + numero + ", cedula=" + perCedula + '}';
+        return "Direccion{" + "codigo=" + codigo + ", callePrin=" + callePrin + ", calleSec=" + calleSec + ", numero=" + numero + ", perCedula=" + perCedula + '}';
     }
 
 }

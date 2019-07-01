@@ -22,12 +22,11 @@ public class ListarDir extends javax.swing.JInternalFrame {
      */
     public static String x;
     private ControladorBaseDireccion contDir;
-    private ContorladorBasePersona contPer;
+    private DefaultTableModel modelo;
 
-    public ListarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
+    public ListarDir() {
         initComponents();
-        this.contDir = contDir;
-        this.contPer = contPer;
+        this.contDir = new ControladorBaseDireccion();
 
         x = "x";
         int a = Menu.desktopPane.getWidth() - this.getWidth();
@@ -41,7 +40,7 @@ public class ListarDir extends javax.swing.JInternalFrame {
 
     public void llenarDatos() {
 
-        DefaultTableModel modelo = (DefaultTableModel) tblDir.getModel();
+         modelo = (DefaultTableModel) tblDir.getModel();
         Set<Direccion> lista = contDir.printDir();
         for (Direccion dir : lista) {
 
@@ -49,7 +48,7 @@ public class ListarDir extends javax.swing.JInternalFrame {
                 dir.getCallePrin(),
                 dir.getCalleSec(),
                 dir.getNumero(),
-                dir.getperCedula()
+                dir.getPerCedula()
             };
             modelo.addRow(datos);
 

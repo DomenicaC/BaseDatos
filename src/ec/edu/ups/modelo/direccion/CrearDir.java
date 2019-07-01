@@ -22,12 +22,10 @@ public class CrearDir extends javax.swing.JInternalFrame {
      */
     public static String x;
     private ControladorBaseDireccion contDir;
-    private ContorladorBasePersona contPer;
 
-    public CrearDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
+    public CrearDir() {
         initComponents();
-        this.contDir = contDir;
-        this.contPer = contPer;
+        this.contDir = new ControladorBaseDireccion();
 
         x = "x";
         int a = Menu.desktopPane.getWidth() - this.getWidth();
@@ -35,6 +33,7 @@ public class CrearDir extends javax.swing.JInternalFrame {
 
         setLocation(a / 2, b / 2);
         setVisible(true);
+
         txtCodigo.setText(String.valueOf(contDir.codigoMax() + 1));
     }
 
@@ -195,6 +194,7 @@ public class CrearDir extends javax.swing.JInternalFrame {
         //direccion = new Direccion(Integer.parseInt(txtCodigo.getText()), txtCallePrin.getText(), txtCalleSec.getText(), Integer.parseInt(txtNum.getText()), null);
         try {
             Direccion direccion = new Direccion();
+            ContorladorBasePersona contPer = new ContorladorBasePersona();
 
             if (contPer.readPer(txtCed.getText()).getCedula() == null) {
 
@@ -206,7 +206,7 @@ public class CrearDir extends javax.swing.JInternalFrame {
                 direccion.setCallePrin(txtCallePrin.getText());
                 direccion.setCalleSec(txtCalleSec.getText());
                 direccion.setNumero(Integer.parseInt(txtNum.getText()));
-                direccion.setperCedula(txtCed.getText());
+                direccion.setPerCedula(txtCed.getText());
                 contDir.crearDir(direccion);
                 JOptionPane.showMessageDialog(this, "Direccion Creada");
 
