@@ -30,7 +30,7 @@ public class ControladorBaseDireccion {
                 + direccion.getCallePrin() + "','"
                 + direccion.getCalleSec() + "',"
                 + direccion.getNumero() + ",'"
-                + direccion.getPersona() + ");";
+                + direccion.getperCedula()+ ");";
         System.out.println("Base creada " + sql);
         miBaseDeDatos.conectar();
 
@@ -66,7 +66,7 @@ public class ControladorBaseDireccion {
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
                 direccion.setNumero(res.getInt("DIR_NUMERO"));
-                //direccion.setPersona("DIR_CEDULA");
+                direccion.setperCedula("DIR_CEDULA");
 
             }
 
@@ -89,7 +89,7 @@ public class ControladorBaseDireccion {
                 + direccion.getCallePrin() + "','"
                 + direccion.getCalleSec() + "',"
                 + direccion.getNumero() + ","
-                + direccion.getPersona() + ") \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
+                + direccion.getperCedula() + ") \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
         System.out.println("Base modificada " + sql);
 
         miBaseDeDatos.conectar();
@@ -142,7 +142,7 @@ public class ControladorBaseDireccion {
                 direccion.setCodigo(res.getInt("DIR_CODIGO"));
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
-                //direccion.setPersona(res.getString("DIR_CEDULA"));
+                direccion.setperCedula(res.getString("DIR_CEDULA"));
                 
             }
             

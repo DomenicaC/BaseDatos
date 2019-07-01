@@ -5,7 +5,6 @@
  */
 package ec.edu.ups.modelo.direccion;
 
-import ec.edu.ups.modelo.persona.Persona;
 
 /**
  *
@@ -17,17 +16,17 @@ public class Direccion {
     private String callePrin;
     private String calleSec;
     private int numero;
-    private Persona persona;
+    private String perCedula;
 
     public Direccion() {
     }
 
-    public Direccion(int codigo, String callePrin, String calleSec, int numero, Persona persona) {
+    public Direccion(int codigo, String callePrin, String calleSec, int numero, String perCedula) {
         this.codigo = codigo;
         this.callePrin = callePrin;
         this.calleSec = calleSec;
         this.numero = numero;
-        this.persona = persona;
+        this.perCedula = perCedula;
     }
 
     public int getCodigo() {
@@ -62,17 +61,17 @@ public class Direccion {
         this.numero = numero;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public String getperCedula() {
+        return perCedula;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setperCedula(String perCedula) {
+        this.perCedula = perCedula;
     }
 
     @Override
     public String toString() {
-        return "Direccion{" + "codigo=" + codigo + ", callePrin=" + callePrin + ", calleSec=" + calleSec + ", numero=" + numero + ", cedula=" + persona.getCedula() + '}';
+        return "Direccion{" + "codigo=" + codigo + ", callePrin=" + callePrin + ", calleSec=" + calleSec + ", numero=" + numero + ", cedula=" + perCedula + '}';
     }
 
 }
