@@ -199,7 +199,6 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
         String cedula = txtCed.getText();
         Persona buscar = contPer.readPer(cedula);
         System.out.println("Buscar " + buscar);
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
         if (buscar == null) {
             JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
