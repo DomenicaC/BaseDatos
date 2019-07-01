@@ -5,7 +5,7 @@
  */
 package ec.edu.ups.controlador;
 
-import ec.edu.ups.modelo.Persona;
+import ec.edu.ups.modelo.persona.Persona;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

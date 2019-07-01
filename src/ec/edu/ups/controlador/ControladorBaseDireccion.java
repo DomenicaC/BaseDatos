@@ -5,7 +5,7 @@
  */
 package ec.edu.ups.controlador;
 
-import ec.edu.ups.modelo.Direccion;
+import ec.edu.ups.modelo.direccion.Direccion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.ups.modelo;
+package ec.edu.ups.modelo.persona;
 
 import java.util.Date;
 import java.text.ParseException;
@@ -14,16 +14,6 @@ import java.text.SimpleDateFormat;
  * @author Domenica Cañizares
  */
 public class Persona {
-
-    private int codigo;
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
 
     private String nombre;
     private String apellido;
@@ -104,11 +94,9 @@ public class Persona {
         this.sueldo = sueldo;
     }
 
-
-
     @Override
     public String toString() {
-        return "Persona{" + "codigo=" + codigo + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", fechaNac=" + fechaNac + ", edad=" + edad + ", celular=" + celular + ", sueldo=" + sueldo + '}';
+        return "Persona{" + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", fechaNac=" + fechaNac + ", edad=" + edad + ", celular=" + celular + ", sueldo=" + sueldo + '}';
     }
 
 }
