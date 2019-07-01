@@ -7,6 +7,8 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
+import ec.edu.ups.modelo.direccion.BuscarDir;
+import ec.edu.ups.modelo.direccion.CrearDir;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
 import ec.edu.ups.modelo.persona.Eliminar;
@@ -26,13 +28,18 @@ public class Menu extends javax.swing.JFrame {
      */
     private ContorladorBasePersona contPer;
     private ControladorBaseDireccion contDir;
-    
+
+    //persona
     private Crear crearP;
     private Buscar buscarP;
     private Modificar modP;
     private Eliminar eliP;
     private Listar listarP;
-    
+
+    //direccion
+    private CrearDir crearD;
+    private BuscarDir buscarD;
+
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -121,10 +128,20 @@ public class Menu extends javax.swing.JFrame {
 
         itemCrear1.setMnemonic('o');
         itemCrear1.setText("Crear");
+        itemCrear1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCrear1ActionPerformed(evt);
+            }
+        });
         itemDir.add(itemCrear1);
 
         itemBuscar1.setMnemonic('s');
         itemBuscar1.setText("Buscar");
+        itemBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscar1ActionPerformed(evt);
+            }
+        });
         itemDir.add(itemBuscar1);
 
         itemMod1.setMnemonic('a');
@@ -168,7 +185,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliActionPerformed
-        
+
         String x = Eliminar.x;
         try {
             if (x == null) {
@@ -176,20 +193,20 @@ public class Menu extends javax.swing.JFrame {
                     eliP = new Eliminar(contPer, contDir);
                     desktopPane.add(eliP);
                     desktopPane.moveToFront(eliP);
-                    
+
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_itemEliActionPerformed
 
     private void itemListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarActionPerformed
-        
+
         String x = Listar.x;
         try {
             if (x == null) {
@@ -197,17 +214,17 @@ public class Menu extends javax.swing.JFrame {
                     listarP = new Listar(contPer);
                     desktopPane.add(listarP);
                     desktopPane.moveToFront(listarP);
-                    
+
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
+
+
     }//GEN-LAST:event_itemListarActionPerformed
 
     private void itemEli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEli1ActionPerformed
@@ -219,7 +236,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemListar1ActionPerformed
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
-        
+
         String x = Crear.x;
         try {
             if (x == null) {
@@ -227,9 +244,9 @@ public class Menu extends javax.swing.JFrame {
                     crearP = new Crear(contPer);
                     desktopPane.add(crearP);
                     desktopPane.moveToFront(crearP);
-                    
+
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
@@ -240,7 +257,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCrearActionPerformed
 
     private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
-        
+
         String x = Buscar.x;
         try {
             if (x == null) {
@@ -248,9 +265,9 @@ public class Menu extends javax.swing.JFrame {
                     buscarP = new Buscar(contPer);
                     desktopPane.add(buscarP);
                     desktopPane.moveToFront(buscarP);
-                    
+
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
@@ -261,7 +278,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemBuscarActionPerformed
 
     private void itemModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModActionPerformed
-        
+
         String x = Modificar.x;
         try {
             if (x == null) {
@@ -269,9 +286,9 @@ public class Menu extends javax.swing.JFrame {
                     modP = new Modificar(contPer);
                     desktopPane.add(modP);
                     desktopPane.moveToFront(modP);
-                    
+
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
@@ -280,6 +297,50 @@ public class Menu extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_itemModActionPerformed
+
+    private void itemCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrear1ActionPerformed
+
+        String x = CrearDir.x;
+        try {
+            if (x == null) {
+
+                if (crearD == null || crearD.isVisible() == false) {
+                    crearD = new CrearDir(contDir, contPer);
+                    desktopPane.add(crearD);
+                    desktopPane.moveToFront(crearD);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_itemCrear1ActionPerformed
+
+    private void itemBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscar1ActionPerformed
+        
+        String x = BuscarDir.x;
+        try {
+            if (x == null) {
+
+                if (buscarD == null || buscarD.isVisible() == false) {
+                    buscarD = new BuscarDir(contDir, contPer);
+                    desktopPane.add(buscarD);
+                    desktopPane.moveToFront(buscarD);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_itemBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments
