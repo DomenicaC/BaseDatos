@@ -283,12 +283,13 @@ public class Buscar extends javax.swing.JInternalFrame {
         } else {
             
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaBD = formato.format(buscar.getFechaNac());
+            //String fechaBD = formato.format(buscar.getFechaNac());
             
+            txtCedula.setText(cedula);
             txtNombre.setText(buscar.getNombre());
             txtApellido.setText(buscar.getApellido());
             txtEdad.setText(String.valueOf(buscar.getEdad()));
-            txtFech.setText(fechaBD);
+            txtFech.setText(formato.format(buscar.getFechaNac()));
             txtCelular.setText(buscar.getCelular());
             txtSueldo.setText(String.valueOf(buscar.getSueldo()));
 
