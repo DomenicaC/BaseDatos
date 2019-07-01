@@ -24,7 +24,7 @@ public class EliminarDir extends javax.swing.JInternalFrame {
     private ControladorBaseDireccion contDir;
     private ContorladorBasePersona contPer;
 
-    public EliminarDir() {
+    public EliminarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
         initComponents();
         this.contDir = contDir;
         this.contPer = contPer;

@@ -10,6 +10,7 @@ import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.direccion.BuscarDir;
 import ec.edu.ups.modelo.direccion.CrearDir;
 import ec.edu.ups.modelo.direccion.EliminarDir;
+import ec.edu.ups.modelo.direccion.ListarDir;
 import ec.edu.ups.modelo.direccion.ModificarDir;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
@@ -43,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
     private BuscarDir buscarD;
     private ModificarDir modDir;
     private EliminarDir eliD;
+    private ListarDir listarD;
 
     public Menu() {
         initComponents();
@@ -242,7 +244,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             if (x == null) {
                 if (eliD == null || eliD.isVisible() == false) {
-                    eliD = new EliminarDir();
+                    eliD = new EliminarDir(contDir, contPer);
                     desktopPane.add(eliD);
                     desktopPane.moveToFront(eliD);
 
@@ -258,7 +260,24 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemEli1ActionPerformed
 
     private void itemListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListar1ActionPerformed
-        // TODO add your handling code here:
+
+        String x = ListarDir.x;
+        try {
+            if (x == null) {
+                if (listarD == null || listarD.isVisible() == false) {
+                    listarD = new ListarDir(contDir, contPer);
+                    desktopPane.add(listarD);
+                    desktopPane.moveToFront(listarD);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_itemListar1ActionPerformed
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
