@@ -92,13 +92,13 @@ public class ContorladorBasePersona {
         Persona persona = null;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fechaBD = formato.format(persona.getFechaNac());
-        String sql = "UPDATE \"PERSONA\" SET('" + persona.getCedula() + "','"
+        String sql = "UPDATE \"PERSONA \" SET('" + persona.getCedula() + "','"
                 + persona.getNombre() + "','"
                 + persona.getApellido() + "',"
                 + persona.getEdad() + ",'"
                 + fechaBD + "','"
                 + persona.getCelular() + "',"
-                + persona.getSueldo() + ")\"WHERE \"PER_CEDULA\"='" + cedula + ";";
+                + persona.getSueldo() + ")\"WHERE \"PER_CEDULA\"='" + cedula + "';";
         System.out.println("Base de datos " + sql);
 
         miBaseDeDatos.conectar();
@@ -118,7 +118,7 @@ public class ContorladorBasePersona {
 
     public void deletePer(String cedula) {
 
-        String sql = "DELETE FROM \"PERSONA\" WHERE\"PER_CEDULA\" = '" + cedula + "';";
+        String sql = "DELETE FROM \"PERSONA \"WHERE \"PER_CEDULA \"='" + cedula + "';";
         System.out.println("Base eliminada " + sql);
 
         miBaseDeDatos.conectar();
