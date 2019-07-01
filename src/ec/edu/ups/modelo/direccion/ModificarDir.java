@@ -8,22 +8,23 @@ package ec.edu.ups.modelo.direccion;
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.vista.Menu;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Domenica Cañizares
  */
-public class BuscarDir extends javax.swing.JInternalFrame {
+public class ModificarDir extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BuscarDir
+     * Creates new form ModificarDir
      */
     public static String x;
     private ControladorBaseDireccion contDir;
     private ContorladorBasePersona contPer;
 
-    public BuscarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
+    public ModificarDir(ControladorBaseDireccion contDir, ContorladorBasePersona contPer) {
         initComponents();
         this.contDir = contDir;
         this.contPer = contPer;
@@ -45,19 +46,20 @@ public class BuscarDir extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCodigo = new javax.swing.JTextField();
+        txtCalleSec = new javax.swing.JTextField();
+        txtCallePrin = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
+        txtCed = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         txtNum = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        txtCalleSec = new javax.swing.JTextField();
-        txtCallePrin = new javax.swing.JTextField();
-        txtCed = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
+        btnMod = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -77,6 +79,12 @@ public class BuscarDir extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCodigo.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
+
+        txtCalleSec.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
+
+        txtCallePrin.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
+
         btnCancelar.setFont(new java.awt.Font("Rockwell", 3, 24)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,12 +93,20 @@ public class BuscarDir extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCed.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
+
         jLabel1.setFont(new java.awt.Font("Rockwell", 3, 36)); // NOI18N
         jLabel1.setText("Direccion");
 
-        txtNum.setEditable(false);
+        btnBuscar.setFont(new java.awt.Font("Rockwell", 3, 24)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         txtNum.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        txtNum.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
         jLabel6.setText("Numero:");
@@ -107,25 +123,11 @@ public class BuscarDir extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
         jLabel5.setText("Cedula:");
 
-        txtCodigo.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-
-        txtCalleSec.setEditable(false);
-        txtCalleSec.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        txtCalleSec.setEnabled(false);
-
-        txtCallePrin.setEditable(false);
-        txtCallePrin.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        txtCallePrin.setEnabled(false);
-
-        txtCed.setEditable(false);
-        txtCed.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        txtCed.setEnabled(false);
-
-        btnBuscar.setFont(new java.awt.Font("Rockwell", 3, 24)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnMod.setFont(new java.awt.Font("Rockwell", 3, 24)); // NOI18N
+        btnMod.setText("Modificar");
+        btnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnModActionPerformed(evt);
             }
         });
 
@@ -133,37 +135,38 @@ public class BuscarDir extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCallePrin, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCalleSec, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)))
-                .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCallePrin, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCalleSec, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnMod)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar)
+                        .addGap(73, 73, 73))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +195,9 @@ public class BuscarDir extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnMod))
                 .addGap(26, 26, 26))
         );
 
@@ -226,6 +231,32 @@ public class BuscarDir extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
+
+        Direccion direccion = new Direccion();
+        try {
+
+            direccion.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            direccion.setCallePrin(txtCallePrin.getText());
+            direccion.setCalleSec(txtCalleSec.getText());
+            direccion.setNumero(Integer.parseInt(txtNum.getText()));
+            direccion.setperCedula(txtCed.getText());
+            contDir.updateDir(direccion);
+            JOptionPane.showMessageDialog(this, "Direccion Modificada");
+
+            txtCallePrin.setText("");
+            txtCalleSec.setText("");
+            txtCed.setText("");
+            txtNum.setText("");
+
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(this, "Direccion nomodificada en la base de datos");
+
+        }
+
+    }//GEN-LAST:event_btnModActionPerformed
+
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         x = null;
     }//GEN-LAST:event_formInternalFrameClosing
@@ -234,6 +265,7 @@ public class BuscarDir extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnMod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

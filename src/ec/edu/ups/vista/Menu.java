@@ -9,6 +9,7 @@ import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.direccion.BuscarDir;
 import ec.edu.ups.modelo.direccion.CrearDir;
+import ec.edu.ups.modelo.direccion.ModificarDir;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
 import ec.edu.ups.modelo.persona.Eliminar;
@@ -39,6 +40,7 @@ public class Menu extends javax.swing.JFrame {
     //direccion
     private CrearDir crearD;
     private BuscarDir buscarD;
+    private ModificarDir modDir;
 
     public Menu() {
         initComponents();
@@ -146,6 +148,11 @@ public class Menu extends javax.swing.JFrame {
 
         itemMod1.setMnemonic('a');
         itemMod1.setText("Modificar");
+        itemMod1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMod1ActionPerformed(evt);
+            }
+        });
         itemDir.add(itemMod1);
 
         itemEli1.setMnemonic('x');
@@ -341,6 +348,28 @@ public class Menu extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_itemBuscar1ActionPerformed
+
+    private void itemMod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMod1ActionPerformed
+        
+        String x = ModificarDir.x;
+        try {
+            if (x == null) {
+
+                if (modDir == null || modDir.isVisible() == false) {
+                    modDir = new ModificarDir(contDir, contPer);
+                    desktopPane.add(modDir);
+                    desktopPane.moveToFront(modDir);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_itemMod1ActionPerformed
 
     /**
      * @param args the command line arguments
