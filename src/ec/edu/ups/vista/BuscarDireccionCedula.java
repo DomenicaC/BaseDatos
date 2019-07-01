@@ -5,9 +5,13 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.direccion.Direccion;
+import ec.edu.ups.modelo.persona.Persona;
+import java.text.SimpleDateFormat;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +28,7 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo;
 
     public BuscarDireccionCedula(ControladorBaseDireccion contDir) {
-        
+
         initComponents();
         modelo = (DefaultTableModel) tblBuscar.getModel();
         x = "x";
@@ -71,6 +75,10 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
         txtCed = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,27 +111,52 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        txtNombre.setEnabled(false);
+
+        jLabel2.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        jLabel2.setText("Nombre");
+
+        txtApellido.setEditable(false);
+        txtApellido.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        txtApellido.setEnabled(false);
+
+        jLabel3.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        jLabel3.setText("Apellido");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(228, 228, 228))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +166,12 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -156,6 +195,23 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         llenarDatos();
 
+        ContorladorBasePersona contPer = new ContorladorBasePersona();
+        String cedula = txtCed.getText();
+        Persona buscar = contPer.readPer(cedula);
+        System.out.println("Buscar " + buscar);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (buscar == null) {
+            JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
+        } else {
+
+            //String fechaBD = formato.format(buscar.getFechaNac());
+            txtCed.setText(cedula);
+            txtNombre.setText(buscar.getNombre());
+            txtApellido.setText(buscar.getApellido());
+
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -163,8 +219,12 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuscar;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCed;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

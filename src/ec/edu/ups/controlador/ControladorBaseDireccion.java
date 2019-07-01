@@ -66,7 +66,7 @@ public class ControladorBaseDireccion {
         Direccion direccion = new Direccion();
         try {
 
-            String sql = "SELECT * FROM \"DIRECCION\" WHERE \"DIR_CODIGO\"=" + codigo + ";";
+            String sql = "SELECT * FROM \"DIRECCION\" WHERE \"DIR_CODIGO\" = '" + codigo + "';";
             System.out.println("Base buscada " + sql);
 
             miBaseDeDatos.conectar();
@@ -82,10 +82,10 @@ public class ControladorBaseDireccion {
                 direccion.setPerCedula(res.getString("DIR_PER_CEDULA"));
 
             }
-            
+
             miBaseDeDatos.desconectar();
             /*res.close();
-            sta.close();*/
+             sta.close();*/
 
         } catch (SQLException error) {
 
@@ -100,7 +100,7 @@ public class ControladorBaseDireccion {
         String sql = "UPDATE \"DIRECCION\" SET \"DIR_CALLEPRIN\" = '" + direccion.getCallePrin() + "',\"DIR_CALLESEC\" = '"
                 + direccion.getCalleSec() + "',\"DIR_NUMERO\" = "
                 + direccion.getNumero() + ",\"DIR_PER_CEDULA\" = '"
-                + direccion.getPerCedula()+ "' WHERE \"DIR_CODIGO\" = " + direccion.getCodigo() + ";";
+                + direccion.getPerCedula() + "' WHERE \"DIR_CODIGO\" = '" + direccion.getCodigo() + "';";
         System.out.println("Base modificada " + sql);
 
         miBaseDeDatos.conectar();
@@ -119,7 +119,7 @@ public class ControladorBaseDireccion {
 
     public void deleteDir(int codigo) throws SQLException {
 
-        String sql = "DELETE FROM \"DIRECCION\" WHERE \"DIR_CODIGO\" = " + codigo + ";";
+        String sql = "DELETE FROM \"DIRECCION\" WHERE \"DIR_CODIGO\" = '" + codigo + "';";
         System.out.println("Base Eliminada " + sql);
 
         miBaseDeDatos.conectar();
@@ -180,7 +180,7 @@ public class ControladorBaseDireccion {
             }
 
             /*res.close();
-            sta.close();*/
+             sta.close();*/
             miBaseDeDatos.desconectar();
 
         } catch (SQLException error) {
@@ -216,7 +216,7 @@ public class ControladorBaseDireccion {
             }
 
             /*res.close();
-            sta.close();*/
+             sta.close();*/
             miBaseDeDatos.desconectar();
 
         } catch (SQLException error) {
