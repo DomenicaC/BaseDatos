@@ -7,6 +7,7 @@ package ec.edu.ups.modelo.persona;
 
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.vista.Menu;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -280,12 +281,15 @@ public class Buscar extends javax.swing.JInternalFrame {
         if (buscar == null) {
             JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
         } else {
-
+            
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaBD = formato.format(buscar.getFechaNac());
+            
             txtNombre.setText(buscar.getNombre());
             txtApellido.setText(buscar.getApellido());
             txtEdad.setText(String.valueOf(buscar.getEdad()));
+            txtFech.setText(fechaBD);
             txtCelular.setText(buscar.getCelular());
-            txtFech.setText(String.valueOf(buscar.getFechaNac()));
             txtSueldo.setText(String.valueOf(buscar.getSueldo()));
 
         }

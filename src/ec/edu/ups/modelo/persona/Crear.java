@@ -8,7 +8,12 @@ package ec.edu.ups.modelo.persona;
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.vista.Menu;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +27,12 @@ public class Crear extends javax.swing.JInternalFrame {
      */
     public static String x;
     public ContorladorBasePersona contPer;
+    private SimpleDateFormat formato;
 
     public Crear(ContorladorBasePersona contPer) {
         initComponents();
         this.contPer = contPer;
+        formato = new SimpleDateFormat("yyyy-MM-dd");
         x = "x";
         //centrar ventana
         int a = Menu.desktopPane.getWidth() - this.getWidth();
@@ -243,25 +250,30 @@ public class Crear extends javax.swing.JInternalFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
 
         Persona persona = new Persona();
-
-        persona.setCedula(txtCedula.getText());
-        persona.setNombre(txtNombre.getText());
-        persona.setApellido(txtApellido.getText());
-        persona.setEdad(Integer.parseInt(txtEdad.getText()));
-        persona.setFechaNac(Date.valueOf(txtFech.getText()));
-        persona.setCelular(txtCelular.getText());
-        persona.setSueldo(Double.parseDouble(txtSueldo.getText()));
-        contPer.crearePer(persona);
-        JOptionPane.showMessageDialog(this, "Persona creada");
-
-        txtCedula.setText("");
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtEdad.setText("");
-        txtFech.setText("");
-        txtCelular.setText("");
-        txtSueldo.setText("");
-
+        try {
+            
+            persona.setCedula(txtCedula.getText());
+            persona.setNombre(txtNombre.getText());
+            persona.setApellido(txtApellido.getText());
+            persona.setEdad(Integer.parseInt(txtEdad.getText()));
+            persona.setFechaNac(formato.parse(txtFech.getText()));
+            persona.setCelular(txtCelular.getText());
+            persona.setSueldo(Double.parseDouble(txtSueldo.getText()));
+            contPer.crearePer(persona);
+            JOptionPane.showMessageDialog(this, "Persona creada");
+            txtCedula.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtEdad.setText("");
+            txtFech.setText("");
+            txtCelular.setText("");
+            txtSueldo.setText("");
+            
+        } catch (ParseException error) {
+            JOptionPane.showMessageDialog(this, "Error en la fecha \n Debe ser en el formato 'yyyy-MM-dd'");
+        }catch(SQLException error1){
+            JOptionPane.showMessageDialog(this, "Persona no cargada en la base de datos");
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -269,7 +281,7 @@ public class Crear extends javax.swing.JInternalFrame {
         this.setVisible(false);
         this.dispose();
         x = null;
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtFechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechActionPerformed

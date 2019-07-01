@@ -8,6 +8,9 @@ package ec.edu.ups.modelo.persona;
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.vista.Menu;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,18 +24,19 @@ public class Modificar extends javax.swing.JInternalFrame {
      */
     public ContorladorBasePersona contPer;
     public static String x;
-
+    private SimpleDateFormat formato;
+    
     public Modificar(ContorladorBasePersona contPer) {
         initComponents();
         x = "x";
         this.contPer = contPer;
-
+        formato = new SimpleDateFormat("yyyy-MM-dd");
         //centrar ventana
         int a = Menu.desktopPane.getWidth() - this.getWidth();
         int b = Menu.desktopPane.getHeight() - this.getHeight();
-
+        
         setLocation(a / 2, b / 2);
-
+        
         setVisible(true);
     }
 
@@ -233,7 +237,7 @@ public class Modificar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         this.setVisible(false);
         this.dispose();
         x = null;
@@ -245,23 +249,26 @@ public class Modificar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFechActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        
         String cedula = txtCedula.getText();
         Persona buscar = contPer.readPer(cedula);
         System.out.println("Buscar " + buscar);
-
+        
         if (buscar == null) {
             JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
         } else {
-
+            
+            String fechaBD = formato.format(buscar.getFechaNac());
+            
             txtNombre.setText(buscar.getNombre());
             txtApellido.setText(buscar.getApellido());
             txtEdad.setText(String.valueOf(buscar.getEdad()));
+            txtFech.setText(fechaBD);
             txtCelular.setText(buscar.getCelular());
-            txtFech.setText(String.valueOf(buscar.getFechaNac()));
             txtSueldo.setText(String.valueOf(buscar.getSueldo()));
-
+            
         }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
@@ -269,28 +276,34 @@ public class Modificar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEdadActionPerformed
 
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
+        try {
+            
+            Persona persona = new Persona();
+            persona.setCedula(txtCedula.getText());
+            persona.setNombre(txtNombre.getText());
+            persona.setApellido(txtApellido.getText());
+            persona.setEdad(Integer.parseInt(txtEdad.getText()));
+            persona.setFechaNac(formato.parse(txtFech.getText()));
+            persona.setCelular(txtCelular.getText());
+            persona.setSueldo(Double.parseDouble(txtSueldo.getText()));
 
-        Persona persona = new Persona();
-        persona.setCedula(txtCedula.getText());
-        persona.setNombre(txtNombre.getText());
-        persona.setApellido(txtApellido.getText());
-        persona.setEdad(Integer.parseInt(txtEdad.getText()));
-        persona.setFechaNac(Date.valueOf(txtFech.getText()));
-        persona.setCelular(txtCelular.getText());
-        persona.setSueldo(Double.parseDouble(txtSueldo.getText()));
-        System.out.println("Persona modificada " + persona);
-        JOptionPane.showMessageDialog(this, "Persona Modificada");
-        String cedula = txtCedula.getText();
-        contPer.updatePer(persona, cedula);
-
-        txtCedula.setText("");
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtEdad.setText("");
-        txtFech.setText("");
-        txtCelular.setText("");
-        txtSueldo.setText("");
-
+            //String cedula = txtCedula.getText();
+            contPer.updatePer(persona);
+            JOptionPane.showMessageDialog(this, "Persona Modificada");
+            System.out.println("Persona modificada " + persona);
+            
+            txtCedula.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtEdad.setText("");
+            txtFech.setText("");
+            txtCelular.setText("");
+            txtSueldo.setText("");
+        } catch (ParseException error) {
+            JOptionPane.showMessageDialog(this, "Error en la fecha de nacimiento");
+        } catch (SQLException error) {
+            JOptionPane.showMessageDialog(this, "Persona no cargada a la base de datos");
+        }
     }//GEN-LAST:event_btnModActionPerformed
 
 

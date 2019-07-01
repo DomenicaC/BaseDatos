@@ -173,7 +173,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             if (x == null) {
                 if (eliP == null || eliP.isVisible() == false) {
-                    eliP = new Eliminar(contPer);
+                    eliP = new Eliminar(contPer, contDir);
                     desktopPane.add(eliP);
                     desktopPane.moveToFront(eliP);
                     
@@ -207,8 +207,6 @@ public class Menu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        Persona pers = contPer.printPer();
-        System.out.println(pers);
         
     }//GEN-LAST:event_itemListarActionPerformed
 

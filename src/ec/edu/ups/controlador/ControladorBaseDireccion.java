@@ -9,6 +9,8 @@ import ec.edu.ups.modelo.direccion.Direccion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -16,21 +18,31 @@ import java.sql.Statement;
  */
 public class ControladorBaseDireccion {
 
+    private int codigo;
     private BaseDatos miBaseDeDatos;
 
     public ControladorBaseDireccion() {
 
         miBaseDeDatos = new BaseDatos();
+        codigo = 0;
 
     }
 
-    public void crearDir(Direccion direccion) {
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void crearDir(Direccion direccion) throws SQLException {
 
         String sql = "INSERT INTO \"DIRECCION\"VALUES(" + direccion.getCodigo() + ",'"
                 + direccion.getCallePrin() + "','"
                 + direccion.getCalleSec() + "',"
                 + direccion.getNumero() + ",'"
-                + direccion.getperCedula()+ ");";
+                + direccion.getperCedula() + ");";
         System.out.println("Base creada " + sql);
         miBaseDeDatos.conectar();
 
@@ -48,7 +60,7 @@ public class ControladorBaseDireccion {
 
     }
 
-    public Direccion readDir(String codigo) {
+    public Direccion readDir(int codigo) {
 
         Direccion direccion = new Direccion();
         try {
@@ -62,11 +74,11 @@ public class ControladorBaseDireccion {
 
             while (res.next()) {
 
-                direccion.setCodigo(res.getInt(codigo));
+                direccion.setCodigo(codigo);
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
                 direccion.setNumero(res.getInt("DIR_NUMERO"));
-                direccion.setperCedula("DIR_CEDULA");
+                direccion.setperCedula("DIR_PER_CEDULA");
 
             }
 
@@ -82,14 +94,12 @@ public class ControladorBaseDireccion {
         return direccion;
     }
 
-    public void updateDir(int codigo) {
+    public void updateDir(Direccion direccion) throws SQLException {
 
-        Direccion direccion = null;
-        String sql = "UPDATE \"DIRECCION \"SET(" + direccion.getCodigo() + ",'"
-                + direccion.getCallePrin() + "','"
-                + direccion.getCalleSec() + "',"
-                + direccion.getNumero() + ","
-                + direccion.getperCedula() + ") \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
+        String sql = "UPDATE \"DIRECCION \"SET\"DIR_CALLEPRIN \"='" + direccion.getCallePrin() + "',\"DIR_CALLESEC \"='"
+                + direccion.getCalleSec() + "',\"DIR_NUMERO \"="
+                + direccion.getNumero() + ",\"DIR_PER_CEDULA \"='"
+                + direccion.getperCedula() + "', \"WHERE \"DIR_CODIGO \"=" + direccion.getCodigo() + ";";
         System.out.println("Base modificada " + sql);
 
         miBaseDeDatos.conectar();
@@ -106,7 +116,7 @@ public class ControladorBaseDireccion {
         }
     }
 
-    public void deleteDir(int codigo) {
+    public void deleteDir(int codigo) throws SQLException{
 
         String sql = "DELETE FROM \"DIRECCION \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
         System.out.println("Base Eliminada " + sql);
@@ -124,37 +134,120 @@ public class ControladorBaseDireccion {
 
         }
     }
+    
+    public void deleteDirPerCed(String cedula) throws SQLException{
 
-    public Direccion printDir() {
+        String sql = "DELETE FROM \"DIRECCION \"WHERE \"DIR_PER_CED \"='" + cedula + "';";
+        System.out.println("Base Eliminada " + sql);
 
-        Direccion direccion = new Direccion();
+        miBaseDeDatos.conectar();
         try {
 
-            String sql = "SELECT * FROM \"DIRECCION \"';";
-            System.out.println("Base listar "+sql);
+            Statement sta = miBaseDeDatos.getConexionBD().createStatement();
+            sta.execute(sql);
+            miBaseDeDatos.desconectar();
+
+        } catch (SQLException error) {
+
+            error.printStackTrace();
+
+        }
+    }
+
+    public Set printDir() {
+
+        Set<Direccion> lista = new HashSet<>();
+        try {
+
+            String sql = "SELECT * FROM \"DIRECCION \";";
+            System.out.println("Base listar " + sql);
 
             miBaseDeDatos.conectar();
             Statement sta = miBaseDeDatos.getConexionBD().createStatement();
             ResultSet res = sta.executeQuery(sql);
-            
-            while(res.next()){
-                
+
+            while (res.next()) {
+
+                Direccion direccion = new Direccion();
                 direccion.setCodigo(res.getInt("DIR_CODIGO"));
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
+                direccion.setNumero(res.getInt("DIR_NUMERO"));
                 direccion.setperCedula(res.getString("DIR_CEDULA"));
-                
+                lista.add(direccion);
+
             }
-            
+
             res.close();
             sta.close();
             miBaseDeDatos.desconectar();
-            
-        }catch(SQLException error){
-            
+
+        } catch (SQLException error) {
+
             error.printStackTrace();
-            
+
         }
-        return direccion;
+        return lista;
+    }
+
+    public Set printDirCedPer(String cedula) {
+
+        Set<Direccion> lista = new HashSet<>();
+        try {
+
+            String sql = "SELECT * FROM \"DIRECCION \"WHERE \"DIR_PER_CEDULA \"='" + cedula + "';";
+            System.out.println("Base listar " + sql);
+
+            miBaseDeDatos.conectar();
+            Statement sta = miBaseDeDatos.getConexionBD().createStatement();
+            ResultSet res = sta.executeQuery(sql);
+
+            while (res.next()) {
+
+                Direccion direccion = new Direccion();
+                direccion.setCodigo(res.getInt("DIR_CODIGO"));
+                direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
+                direccion.setCalleSec(res.getString("DIR_CALLESEC"));
+                direccion.setNumero(res.getInt("DIR_NUMERO"));
+                direccion.setperCedula(res.getString("DIR_CEDULA"));
+                lista.add(direccion);
+
+            }
+
+            res.close();
+            sta.close();
+            miBaseDeDatos.desconectar();
+
+        } catch (SQLException error) {
+
+            error.printStackTrace();
+
+        }
+        return lista;
+    }
+
+    public int codigoMax() {
+        int cod = 0;
+        try {
+
+            String sql = "SELECT MAX (\"DIR_CODIGO\") FROM \"DIRECCION\";";
+            System.out.println("Base de datos " + sql);
+
+            miBaseDeDatos.conectar();
+            Statement sta = miBaseDeDatos.getConexionBD().createStatement();
+            ResultSet res = sta.executeQuery(sql);
+            while (res.next()) {
+
+                cod = res.getInt("max");
+
+            }
+            miBaseDeDatos.desconectar();
+
+        } catch (SQLException error) {
+
+            error.printStackTrace();
+
+        }
+        return cod;
     }
 }

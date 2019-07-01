@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -18,16 +20,17 @@ import java.text.SimpleDateFormat;
 public class ContorladorBasePersona {
 
     private BaseDatos miBaseDeDatos;
+    SimpleDateFormat formato;
 
     public ContorladorBasePersona() {
 
         miBaseDeDatos = new BaseDatos();
+        formato = new SimpleDateFormat("yyyy-MM-dd");
 
     }
 
-    public void crearePer(Persona persona) {
+    public void crearePer(Persona persona) throws SQLException{
 
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fechaBD = formato.format(persona.getFechaNac());
         String sql = "INSERT INTO \"PERSONA\" VALUES('" + persona.getCedula() + "','"
                 + persona.getNombre() + "','"
@@ -58,7 +61,7 @@ public class ContorladorBasePersona {
         Persona per = new Persona();
         try {
 
-            String sql = "SELECT * FROM \"PERSONA\"WHERE\"PER_CEDULA\"='" + cedula + "';";
+            String sql = "SELECT * FROM \"PERSONA \"WHERE \"PER_CEDULA \"='" + cedula + "';";
             System.out.println("Base " + sql);
 
             miBaseDeDatos.conectar();
@@ -88,17 +91,15 @@ public class ContorladorBasePersona {
         return per;
     }
 
-    public void updatePer(Persona persona, String cedula) {
+    public void updatePer(Persona persona) throws SQLException{
         
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fechaBD = formato.format(persona.getFechaNac());
-        String sql = "UPDATE \"PERSONA \" SET('" + persona.getCedula() + "','"
-                + persona.getNombre() + "','"
-                + persona.getApellido() + "',"
-                + persona.getEdad() + ",'"
-                + fechaBD + "','"
-                + persona.getCelular() + "',"
-                + persona.getSueldo() + ")\"WHERE \"PER_CEDULA\"='" + cedula + "';";
+        String sql = "UPDATE \"PERSONA \" SET \"PER_NOMBRE \"='" + persona.getNombre() + "',\"PER_APELLIDO \"='"
+                + persona.getApellido() + "',\"PER_EDAD \"="
+                + persona.getEdad() + ",\"PER_FECHA \"='"
+                + fechaBD + "',\"PER_CELULAR \"='"
+                + persona.getCelular() + "',\"PER_SUELDO \"="
+                + persona.getSueldo() + ")\"WHERE \"PER_CEDULA\"='" + persona.getCedula() + "';";
         System.out.println("Base de datos " + sql);
 
         miBaseDeDatos.conectar();
@@ -116,7 +117,7 @@ public class ContorladorBasePersona {
 
     }
 
-    public void deletePer(String cedula) {
+    public void deletePer(String cedula) throws SQLException{
 
         String sql = "DELETE FROM \"PERSONA \"WHERE \"PER_CEDULA \"='" + cedula + "';";
         System.out.println("Base eliminada " + sql);
@@ -136,20 +137,21 @@ public class ContorladorBasePersona {
 
     }
     
-    public Persona printPer(){
+    public Set printPer(){
         
-        Persona per = new Persona();
+        Set<Persona> lista = new HashSet<>();
         try {
 
-            String sql = "SELECT * FROM \"PERSONA\"';";
-            System.out.println("Base " + sql);
+            String sql = "SELECT * FROM \"PERSONA\";";
+            System.out.println("Base \n" + sql);
 
             miBaseDeDatos.conectar();
             Statement sta = miBaseDeDatos.getConexionBD().createStatement();
             ResultSet res = sta.executeQuery(sql);
 
             while (res.next()) {
-
+                
+                Persona per = new Persona();
                 per.setCedula(res.getString("PER_CEDULA"));
                 per.setNombre(res.getString("PER_NOMBRE"));
                 per.setApellido(res.getString("PER_APELLIDO"));
@@ -157,7 +159,8 @@ public class ContorladorBasePersona {
                 per.setFechaNac(res.getDate("PER_FECHA"));
                 per.setCelular(res.getString("PER_CELULAR"));
                 per.setSueldo(res.getDouble("PER_SUELDO"));
-
+                lista.add(per);
+                
             }
             res.close();
             sta.close();
@@ -168,6 +171,6 @@ public class ContorladorBasePersona {
             error.printStackTrace();
 
         }
-        return per;
+        return lista;
     }
 }

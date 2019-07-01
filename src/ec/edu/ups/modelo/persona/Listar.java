@@ -7,6 +7,7 @@ package ec.edu.ups.modelo.persona;
 
 import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.vista.Menu;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +19,7 @@ public class Listar extends javax.swing.JInternalFrame {
     /**
      * Creates new form Listar
      */
-    public ContorladorBasePersona contPer;
+    private ContorladorBasePersona contPer;
     public static String x;
 
     public Listar(ContorladorBasePersona contPer) {
@@ -33,17 +34,28 @@ public class Listar extends javax.swing.JInternalFrame {
         setLocation(a / 2, b / 2);
 
         setVisible(true);
-        
+
         llenarDatos();
     }
-    
-    public void llenarDatos(){
-        
+
+    public void llenarDatos() {
+
         DefaultTableModel modelo = (DefaultTableModel) tblPersona.getModel();
-        
-        Persona lista = contPer.printPer();
-        
-        
+
+        Set<Persona> lista = contPer.printPer();
+        for (Persona per : lista) {
+
+            Object[] datos = {per.getCedula(),
+                per.getNombre(),
+                per.getApellido(),
+                per.getEdad(),
+                per.getFechaNac(),
+                per.getSueldo()
+            };
+            
+            modelo.addRow(datos);
+        }
+
     }
 
     /**
