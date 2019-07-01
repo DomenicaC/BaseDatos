@@ -88,8 +88,8 @@ public class ContorladorBasePersona {
         return per;
     }
 
-    public void updatePer(String cedula) {
-        Persona persona = null;
+    public void updatePer(Persona persona, String cedula) {
+        
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fechaBD = formato.format(persona.getFechaNac());
         String sql = "UPDATE \"PERSONA \" SET('" + persona.getCedula() + "','"

@@ -9,6 +9,7 @@ import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
+import ec.edu.ups.modelo.persona.Modificar;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class Menu extends javax.swing.JFrame {
 
     private Crear crearP;
     private Buscar buscarP;
+    private Modificar modP;
 
     public Menu() {
         initComponents();
@@ -82,6 +84,11 @@ public class Menu extends javax.swing.JFrame {
 
         itemMod.setMnemonic('a');
         itemMod.setText("Modificar");
+        itemMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModActionPerformed(evt);
+            }
+        });
         menuPersona.add(itemMod);
 
         itemEli.setMnemonic('x');
@@ -173,13 +180,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
 
-        String x = Crear.x;
+        String x = Modificar.x;
         try {
             if (x == null) {
-                if (crearP == null || crearP.isVisible() == false) {
-                    crearP = new Crear(contPer);
-                    desktopPane.add(crearP);
-                    desktopPane.moveToFront(crearP);
+                if (modP == null || modP.isVisible() == false) {
+                    modP = new Modificar(contPer);
+                    desktopPane.add(modP);
+                    desktopPane.moveToFront(modP);
 
                 }
 
@@ -212,6 +219,27 @@ public class Menu extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_itemBuscarActionPerformed
+
+    private void itemModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModActionPerformed
+
+        String x = Buscar.x;
+        try {
+            if (x == null) {
+                if (buscarP == null || buscarP.isVisible() == false) {
+                    buscarP = new Buscar(contPer);
+                    desktopPane.add(buscarP);
+                    desktopPane.moveToFront(buscarP);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_itemModActionPerformed
 
     /**
      * @param args the command line arguments
