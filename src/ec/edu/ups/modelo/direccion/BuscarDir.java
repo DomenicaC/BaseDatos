@@ -210,6 +210,7 @@ public class BuscarDir extends javax.swing.JInternalFrame {
 
         int codigo = Integer.parseInt(txtCodigo.getText());
         Direccion buscar = contDir.readDir(codigo);
+        System.out.println("Codigo " + codigo);
 
         if (buscar == null) {
 
@@ -217,6 +218,7 @@ public class BuscarDir extends javax.swing.JInternalFrame {
 
         } else {
 
+            txtCodigo.setText(String.valueOf(codigo));
             txtCallePrin.setText(buscar.getCallePrin());
             txtCalleSec.setText(buscar.getCalleSec());
             txtNum.setText(String.valueOf(buscar.getNumero()));

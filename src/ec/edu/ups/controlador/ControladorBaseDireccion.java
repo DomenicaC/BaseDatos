@@ -38,11 +38,11 @@ public class ControladorBaseDireccion {
 
     public void crearDir(Direccion direccion) throws SQLException {
 
-        String sql = "INSERT INTO \"DIRECCION\"VALUES(" + direccion.getCodigo() + ",'"
+        String sql = "INSERT INTO \"DIRECCION\" VALUES(" + direccion.getCodigo() + ",'"
                 + direccion.getCallePrin() + "','"
-                + direccion.getCalleSec() + "',"
+                + direccion.getCalleSec() + "', "
                 + direccion.getNumero() + ",'"
-                + direccion.getperCedula() + ");";
+                + direccion.getperCedula() + "')";
         System.out.println("Base creada " + sql);
         miBaseDeDatos.conectar();
 
@@ -65,7 +65,7 @@ public class ControladorBaseDireccion {
         Direccion direccion = new Direccion();
         try {
 
-            String sql = "SELECT * FROM \"DIRECCION \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
+            String sql = "SELECT * FROM \"DIRECCION\" WHERE\" DIR_CODIGO\" = " + codigo + ";";
             System.out.println("Base buscada " + sql);
 
             miBaseDeDatos.conectar();
@@ -74,11 +74,11 @@ public class ControladorBaseDireccion {
 
             while (res.next()) {
 
-                direccion.setCodigo(codigo);
+                direccion.setCodigo(res.getInt("PER_CODIGO"));
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
                 direccion.setNumero(res.getInt("DIR_NUMERO"));
-                direccion.setperCedula("DIR_PER_CEDULA");
+                direccion.setperCedula(res.getString("DIR_PER_CEDULA"));
 
             }
 
@@ -116,7 +116,7 @@ public class ControladorBaseDireccion {
         }
     }
 
-    public void deleteDir(int codigo) throws SQLException{
+    public void deleteDir(int codigo) throws SQLException {
 
         String sql = "DELETE FROM \"DIRECCION \"WHERE \"DIR_CODIGO \"=" + codigo + ";";
         System.out.println("Base Eliminada " + sql);
@@ -134,8 +134,8 @@ public class ControladorBaseDireccion {
 
         }
     }
-    
-    public void deleteDirPerCed(String cedula) throws SQLException{
+
+    public void deleteDirPerCed(String cedula) throws SQLException {
 
         String sql = "DELETE FROM \"DIRECCION \"WHERE \"DIR_PER_CED \"='" + cedula + "';";
         System.out.println("Base Eliminada " + sql);
@@ -159,7 +159,7 @@ public class ControladorBaseDireccion {
         Set<Direccion> lista = new HashSet<>();
         try {
 
-            String sql = "SELECT * FROM \"DIRECCION \";";
+            String sql = "SELECT * FROM \"DIRECCION\";";
             System.out.println("Base listar " + sql);
 
             miBaseDeDatos.conectar();
@@ -173,7 +173,7 @@ public class ControladorBaseDireccion {
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
                 direccion.setNumero(res.getInt("DIR_NUMERO"));
-                direccion.setperCedula(res.getString("DIR_CEDULA"));
+                direccion.setperCedula(res.getString("DIR_PER_CEDULA"));
                 lista.add(direccion);
 
             }
@@ -195,7 +195,7 @@ public class ControladorBaseDireccion {
         Set<Direccion> lista = new HashSet<>();
         try {
 
-            String sql = "SELECT * FROM \"DIRECCION \"WHERE \"DIR_PER_CEDULA \"='" + cedula + "';";
+            String sql = "SELECT * FROM \"DIRECCION\"WHERE\"DIR_PER_CEDULA\"='" + cedula + "';";
             System.out.println("Base listar " + sql);
 
             miBaseDeDatos.conectar();
@@ -209,7 +209,7 @@ public class ControladorBaseDireccion {
                 direccion.setCallePrin(res.getString("DIR_CALLEPRIN"));
                 direccion.setCalleSec(res.getString("DIR_CALLESEC"));
                 direccion.setNumero(res.getInt("DIR_NUMERO"));
-                direccion.setperCedula(res.getString("DIR_CEDULA"));
+                direccion.setperCedula(res.getString("DIR_PER_CEDULA"));
                 lista.add(direccion);
 
             }

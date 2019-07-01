@@ -29,7 +29,7 @@ public class ContorladorBasePersona {
 
     }
 
-    public void crearePer(Persona persona) throws SQLException{
+    public void crearePer(Persona persona) throws SQLException {
 
         String fechaBD = formato.format(persona.getFechaNac());
         String sql = "INSERT INTO \"PERSONA\" VALUES('" + persona.getCedula() + "','"
@@ -58,10 +58,11 @@ public class ContorladorBasePersona {
     }
 
     public Persona readPer(String cedula) {
+
         Persona per = new Persona();
         try {
 
-            String sql = "SELECT * FROM \"PERSONA \"WHERE \"PER_CEDULA \"='" + cedula + "';";
+            String sql = "SELECT * FROM \"PERSONA\"WHERE\"PER_CEDULA\"='" + cedula + "';";
             System.out.println("Base " + sql);
 
             miBaseDeDatos.conectar();
@@ -70,7 +71,7 @@ public class ContorladorBasePersona {
 
             while (res.next()) {
 
-                per.setCedula(cedula);
+                per.setCedula(res.getString("PER_CEDULA"));
                 per.setNombre(res.getString("PER_NOMBRE"));
                 per.setApellido(res.getString("PER_APELLIDO"));
                 per.setEdad(res.getInt("PER_EDAD"));
@@ -91,15 +92,15 @@ public class ContorladorBasePersona {
         return per;
     }
 
-    public void updatePer(Persona persona) throws SQLException{
-        
+    public void updatePer(Persona persona) throws SQLException {
+
         String fechaBD = formato.format(persona.getFechaNac());
-        String sql = "UPDATE \"PERSONA \" SET \"PER_NOMBRE \"='" + persona.getNombre() + "',\"PER_APELLIDO \"='"
-                + persona.getApellido() + "',\"PER_EDAD \"="
-                + persona.getEdad() + ",\"PER_FECHA \"='"
-                + fechaBD + "',\"PER_CELULAR \"='"
-                + persona.getCelular() + "',\"PER_SUELDO \"="
-                + persona.getSueldo() + ")\"WHERE \"PER_CEDULA\"='" + persona.getCedula() + "';";
+        String sql = "UPDATE \"PERSONA\" SET \"PER_NOMBRE\" = '" + persona.getNombre() + "',\"PER_APELLIDO\" = '"
+                + persona.getApellido() + "',\"PER_EDAD\" = "
+                + persona.getEdad() + ",\"PER_FECHA\" = '"
+                + fechaBD + "',\"PER_CELULAR\" = '"
+                + persona.getCelular() + "',\"PER_SUELDO\" = "
+                + persona.getSueldo() + " WHERE \"PER_CEDULA\" = '" + persona.getCedula() + "';";
         System.out.println("Base de datos " + sql);
 
         miBaseDeDatos.conectar();
@@ -117,9 +118,9 @@ public class ContorladorBasePersona {
 
     }
 
-    public void deletePer(String cedula) throws SQLException{
+    public void deletePer(String cedula) throws SQLException {
 
-        String sql = "DELETE FROM \"PERSONA \"WHERE \"PER_CEDULA \"='" + cedula + "';";
+        String sql = "DELETE FROM \"PERSONA\"WHERE\"PER_CEDULA\"='" + cedula + "';";
         System.out.println("Base eliminada " + sql);
 
         miBaseDeDatos.conectar();
@@ -136,9 +137,9 @@ public class ContorladorBasePersona {
         }
 
     }
-    
-    public Set printPer(){
-        
+
+    public Set printPer() {
+
         Set<Persona> lista = new HashSet<>();
         try {
 
@@ -150,7 +151,7 @@ public class ContorladorBasePersona {
             ResultSet res = sta.executeQuery(sql);
 
             while (res.next()) {
-                
+
                 Persona per = new Persona();
                 per.setCedula(res.getString("PER_CEDULA"));
                 per.setNombre(res.getString("PER_NOMBRE"));
@@ -160,7 +161,7 @@ public class ContorladorBasePersona {
                 per.setCelular(res.getString("PER_CELULAR"));
                 per.setSueldo(res.getDouble("PER_SUELDO"));
                 lista.add(per);
-                
+
             }
             res.close();
             sta.close();

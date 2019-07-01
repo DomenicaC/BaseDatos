@@ -266,6 +266,7 @@ public class Modificar extends javax.swing.JInternalFrame {
             txtFech.setText(fechaBD);
             txtCelular.setText(buscar.getCelular());
             txtSueldo.setText(String.valueOf(buscar.getSueldo()));
+            cedula = txtCedula.getText();
             
         }
 

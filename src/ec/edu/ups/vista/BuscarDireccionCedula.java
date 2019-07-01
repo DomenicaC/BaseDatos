@@ -19,18 +19,30 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
     /**
      * Creates new form BuscarDireccionCedula
      */
-    ControladorBaseDireccion contDir;
+    private ControladorBaseDireccion contDir;
+    public static String x;
+    private DefaultTableModel modelo;
 
     public BuscarDireccionCedula(ControladorBaseDireccion contDir) {
+        
         initComponents();
-
+        modelo = (DefaultTableModel) tblBuscar.getModel();
+        x = "x";
         this.contDir = contDir;
+        contDir = new ControladorBaseDireccion();
 
-        llenarDatos();
+        //centrar ventana
+        int a = Menu.desktopPane.getWidth() - this.getWidth();
+        int b = Menu.desktopPane.getHeight() - this.getHeight();
+
+        setLocation(a / 2, b / 2);
+
+        setVisible(true);
+
     }
 
     public void llenarDatos() {
-        DefaultTableModel modelo = (DefaultTableModel) tblBuscar.getModel();
+
         Set<Direccion> lista = contDir.printDirCedPer(txtCed.getText());
         for (Direccion dir : lista) {
 
@@ -58,6 +70,7 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtCed = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,6 +89,19 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setFont(new java.awt.Font("Rockwell", 3, 18)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,6 +120,10 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,14 +135,32 @@ public class BuscarDireccionCedula extends javax.swing.JInternalFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        this.setVisible(false);
+        this.dispose();
+        x = null;
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        modelo.setColumnCount(4);
+        modelo.setRowCount(0);
+        llenarDatos();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

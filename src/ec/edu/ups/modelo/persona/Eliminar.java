@@ -267,29 +267,29 @@ public class Eliminar extends javax.swing.JInternalFrame {
             String cedula = txtCedula.getText();
             contPer.deletePer(cedula);
             JOptionPane.showMessageDialog(this, "Persona Eliminada");
-            try {
-
-                contDir.deleteDirPerCed(txtCedula.getText());
-                txtCedula.setText("");
-
-            } catch (SQLException error1) {
-
-                JOptionPane.showMessageDialog(this, "Error al eliminar la direccion " + error1.toString());
-
-            }
 
         } catch (SQLException error) {
             JOptionPane.showMessageDialog(this, "Persona no eliminada de la base de datos");
         }
+        ControladorBaseDireccion contD = new ControladorBaseDireccion();
+        try {
 
-        if (txtCedula.getText() == "") {
-            txtNombre.setText("");
-            txtApellido.setText("");
-            txtEdad.setText("");
-            txtFech.setText("");
-            txtCelular.setText("");
-            txtSueldo.setText("");
+            contD.deleteDirPerCed(txtCedula.getText());
+
+        } catch (SQLException error1) {
+
+            JOptionPane.showMessageDialog(this, "Error al eliminar la direccion " + error1.toString());
+
         }
+
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        txtFech.setText("");
+        txtCelular.setText("");
+        txtSueldo.setText("");
+
     }//GEN-LAST:event_btnEliActionPerformed
 
     private void txtFechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechActionPerformed
@@ -306,12 +306,11 @@ public class Eliminar extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
         } else {
 
-            String fechaBD = formato.format(buscar.getFechaNac());
-
+            //String fechaBD = );
             txtNombre.setText(buscar.getNombre());
             txtApellido.setText(buscar.getApellido());
             txtEdad.setText(String.valueOf(buscar.getEdad()));
-            txtFech.setText(fechaBD);
+            txtFech.setText(formato.format(buscar.getFechaNac()));
             txtCelular.setText(buscar.getCelular());
             txtSueldo.setText(String.valueOf(buscar.getSueldo()));
 

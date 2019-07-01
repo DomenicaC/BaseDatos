@@ -277,12 +277,13 @@ public class Buscar extends javax.swing.JInternalFrame {
         String cedula = txtCedula.getText();
         Persona buscar = contPer.readPer(cedula);
         System.out.println("Buscar " + buscar);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
         if (buscar == null) {
             JOptionPane.showMessageDialog(this, "Cedula no existe en la base de datos");
         } else {
             
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            
             //String fechaBD = formato.format(buscar.getFechaNac());
             
             txtCedula.setText(cedula);

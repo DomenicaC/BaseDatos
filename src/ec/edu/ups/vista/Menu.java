@@ -45,6 +45,8 @@ public class Menu extends javax.swing.JFrame {
     private ModificarDir modDir;
     private EliminarDir eliD;
     private ListarDir listarD;
+    
+    private BuscarDireccionCedula bus;
 
     public Menu() {
         initComponents();
@@ -76,6 +78,7 @@ public class Menu extends javax.swing.JFrame {
         itemMod1 = new javax.swing.JMenuItem();
         itemEli1 = new javax.swing.JMenuItem();
         itemListar1 = new javax.swing.JMenuItem();
+        itemListar2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,6 +179,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         itemDir.add(itemListar1);
+
+        itemListar2.setMnemonic('x');
+        itemListar2.setText("Listar por cedula");
+        itemListar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListar2ActionPerformed(evt);
+            }
+        });
+        itemDir.add(itemListar2);
 
         menuBar.add(itemDir);
 
@@ -409,6 +421,28 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_itemMod1ActionPerformed
 
+    private void itemListar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListar2ActionPerformed
+        
+        String x = BuscarDireccionCedula.x;
+        try {
+            if (x == null) {
+
+                if (bus == null || bus.isVisible() == false) {
+                    bus = new BuscarDireccionCedula(contDir);
+                    desktopPane.add(bus);
+                    desktopPane.moveToFront(bus);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_itemListar2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +489,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemEli1;
     private javax.swing.JMenuItem itemListar;
     private javax.swing.JMenuItem itemListar1;
+    private javax.swing.JMenuItem itemListar2;
     private javax.swing.JMenuItem itemMod;
     private javax.swing.JMenuItem itemMod1;
     private javax.swing.JMenuBar menuBar;
