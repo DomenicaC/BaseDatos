@@ -9,6 +9,8 @@ import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
+import ec.edu.ups.modelo.persona.Eliminar;
+import ec.edu.ups.modelo.persona.Listar;
 import ec.edu.ups.modelo.persona.Modificar;
 import javax.swing.JOptionPane;
 
@@ -23,11 +25,13 @@ public class Menu extends javax.swing.JFrame {
      */
     private ContorladorBasePersona contPer;
     private ControladorBaseDireccion contDir;
-
+    
     private Crear crearP;
     private Buscar buscarP;
     private Modificar modP;
-
+    private Eliminar eliP;
+    private Listar listarP;
+    
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -163,11 +167,45 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliActionPerformed
-        System.exit(0);
+        
+        String x = Eliminar.x;
+        try {
+            if (x == null) {
+                if (eliP == null || eliP.isVisible() == false) {
+                    eliP = new Eliminar(contPer);
+                    desktopPane.add(eliP);
+                    desktopPane.moveToFront(eliP);
+                    
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_itemEliActionPerformed
 
     private void itemListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarActionPerformed
-        // TODO add your handling code here:
+        
+        String x = Listar.x;
+        try {
+            if (x == null) {
+                if (listarP == null || listarP.isVisible() == false) {
+                    listarP = new Listar(contPer);
+                    desktopPane.add(listarP);
+                    desktopPane.moveToFront(listarP);
+                    
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_itemListarActionPerformed
 
     private void itemEli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEli1ActionPerformed
@@ -179,17 +217,17 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemListar1ActionPerformed
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
-
-        String x = Modificar.x;
+        
+        String x = Crear.x;
         try {
             if (x == null) {
-                if (modP == null || modP.isVisible() == false) {
-                    modP = new Modificar(contPer);
-                    desktopPane.add(modP);
-                    desktopPane.moveToFront(modP);
-
+                if (crearP == null || crearP.isVisible() == false) {
+                    crearP = new Crear(contPer);
+                    desktopPane.add(crearP);
+                    desktopPane.moveToFront(crearP);
+                    
                 }
-
+                
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
@@ -200,7 +238,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCrearActionPerformed
 
     private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
-
+        
         String x = Buscar.x;
         try {
             if (x == null) {
@@ -208,9 +246,9 @@ public class Menu extends javax.swing.JFrame {
                     buscarP = new Buscar(contPer);
                     desktopPane.add(buscarP);
                     desktopPane.moveToFront(buscarP);
-
+                    
                 }
-
+                
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
@@ -221,17 +259,17 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemBuscarActionPerformed
 
     private void itemModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModActionPerformed
-
-        String x = Buscar.x;
+        
+        String x = Modificar.x;
         try {
             if (x == null) {
-                if (buscarP == null || buscarP.isVisible() == false) {
-                    buscarP = new Buscar(contPer);
-                    desktopPane.add(buscarP);
-                    desktopPane.moveToFront(buscarP);
-
+                if (modP == null || modP.isVisible() == false) {
+                    modP = new Modificar(contPer);
+                    desktopPane.add(modP);
+                    desktopPane.moveToFront(modP);
+                    
                 }
-
+                
             } else {
                 JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
             }
