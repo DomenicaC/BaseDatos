@@ -9,6 +9,7 @@ import ec.edu.ups.controlador.ContorladorBasePersona;
 import ec.edu.ups.controlador.ControladorBaseDireccion;
 import ec.edu.ups.modelo.direccion.BuscarDir;
 import ec.edu.ups.modelo.direccion.CrearDir;
+import ec.edu.ups.modelo.direccion.EliminarDir;
 import ec.edu.ups.modelo.direccion.ModificarDir;
 import ec.edu.ups.modelo.persona.Buscar;
 import ec.edu.ups.modelo.persona.Crear;
@@ -41,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
     private CrearDir crearD;
     private BuscarDir buscarD;
     private ModificarDir modDir;
+    private EliminarDir eliD;
 
     public Menu() {
         initComponents();
@@ -235,7 +237,24 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemListarActionPerformed
 
     private void itemEli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEli1ActionPerformed
-        // TODO add your handling code here:
+
+        String x = Eliminar.x;
+        try {
+            if (x == null) {
+                if (eliD == null || eliD.isVisible() == false) {
+                    eliD = new EliminarDir();
+                    desktopPane.add(eliD);
+                    desktopPane.moveToFront(eliD);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_itemEli1ActionPerformed
 
     private void itemListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListar1ActionPerformed
@@ -328,7 +347,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCrear1ActionPerformed
 
     private void itemBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscar1ActionPerformed
-        
+
         String x = BuscarDir.x;
         try {
             if (x == null) {
@@ -346,11 +365,11 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_itemBuscar1ActionPerformed
 
     private void itemMod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMod1ActionPerformed
-        
+
         String x = ModificarDir.x;
         try {
             if (x == null) {
@@ -368,7 +387,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_itemMod1ActionPerformed
 
     /**
