@@ -5,6 +5,12 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ContorladorBasePersona;
+import ec.edu.ups.controlador.ControladorBaseDireccion;
+import ec.edu.ups.modelo.persona.Buscar;
+import ec.edu.ups.modelo.persona.Crear;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Domenica Cañizares
@@ -14,8 +20,17 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    private ContorladorBasePersona contPer;
+    private ControladorBaseDireccion contDir;
+
+    private Crear crearP;
+    private Buscar buscarP;
+
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        contDir = new ControladorBaseDireccion();
+        contPer = new ContorladorBasePersona();
     }
 
     /**
@@ -49,10 +64,20 @@ public class Menu extends javax.swing.JFrame {
 
         itemCrear.setMnemonic('o');
         itemCrear.setText("Crear");
+        itemCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCrearActionPerformed(evt);
+            }
+        });
         menuPersona.add(itemCrear);
 
         itemBuscar.setMnemonic('s');
         itemBuscar.setText("Buscar");
+        itemBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarActionPerformed(evt);
+            }
+        });
         menuPersona.add(itemBuscar);
 
         itemMod.setMnemonic('a');
@@ -145,6 +170,48 @@ public class Menu extends javax.swing.JFrame {
     private void itemListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemListar1ActionPerformed
+
+    private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
+
+        String x = Crear.x;
+        try {
+            if (x == null) {
+                if (crearP == null || crearP.isVisible() == false) {
+                    crearP = new Crear(contPer);
+                    desktopPane.add(crearP);
+                    desktopPane.moveToFront(crearP);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_itemCrearActionPerformed
+
+    private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
+
+        String x = Buscar.x;
+        try {
+            if (x == null) {
+                if (buscarP == null || buscarP.isVisible() == false) {
+                    buscarP = new Buscar(contPer);
+                    desktopPane.add(buscarP);
+                    desktopPane.moveToFront(buscarP);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La ventana ya esta abierta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_itemBuscarActionPerformed
 
     /**
      * @param args the command line arguments
